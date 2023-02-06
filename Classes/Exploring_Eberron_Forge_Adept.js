@@ -54,7 +54,7 @@ AddSubClass("artificer", "forge adept", {
             calcChanges : {
                 atkAdd : [
                     function (fields, v) {
-                        if (!v.theWea.isMagicWeapon && (/^(?=.*ghaalshaarat).*$/i).test(v.WeaponTextName)) {
+                        if (!v.isSpell && !v.theWea.isMagicWeapon && (/^(?=.*ghaalshaarat).*$/i).test(v.WeaponTextName)) {
                             v.theWea.isMagicWeapon = true;
                             fields.Description += (fields.Description ? '; ' : '') + 'Its my Ghaalshaarat';
                             if ((/^(?=.*thrown).*$/i).test(v.WeaponText)) {
