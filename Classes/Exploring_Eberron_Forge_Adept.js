@@ -44,40 +44,14 @@ AddSubClass("artificer", "forge adept", {
             name : "Ghaal'Shaarat",
             source : ["EE:KB", 214],
             minlevel : 3,
-            description : desc([
-                "I turn one simple or martial melee weapon into my ghaalshaarat weapon",
-                "My weapon gains a +1 to damage and attack rolls unless the bonus was already higher",
-                "This increases to +2 at 8th level and +3 at 13th",
-                "If my weapon has the thrown property, it returns to my hand immediately after a ranged attack",
-                "The benefits only apply to me until the weapon is destroyed or I imbue a new item"
-            ]),
-            calcChanges : {
-                atkAdd : [
-                    function (fields, v) {
-                        if (!v.isSpell && !v.theWea.isMagicWeapon && (/^(?=.*ghaalshaarat).*$/i).test(v.WeaponTextName)) {
-                            v.theWea.isMagicWeapon = true;
-                            fields.Description += (fields.Description ? '; ' : '') + 'Its my Ghaalshaarat';
-                            if ((/^(?=.*thrown).*$/i).test(v.WeaponText)) {
-                                fields.Description += (fields.Description ? '; ' : '') + 'Returns immediately after ranged attack';
-                            }
-                        }
-                    },
-                    'If my weapon has ghaalshaarat it gains a bonus to hit and damage.'
-                ],
-                atkCalc : [
-                    function (fields, v, output) {
-                        if ((classes.known.artificer.level >= 2 && classes.known.artificer.level <= 6 && (/^(?=.*ghaalshaarat).*$/i).test(v.WeaponTextName))) {
-                            output.magic = v.thisWeapon[1] + 1;                            
-                        }
-                        else if ((classes.known.artificer.level >= 7 && classes.known.artificer.level <= 12 && (/^(?=.*ghaalshaarat).*$/i).test(v.WeaponTextName))) {
-                            output.magic = v.thisWeapon[1] + 2;          
-                        }
-                        else if ((classes.known.artificer.level >= 13 && (/^(?=.*ghaalshaarat).*$/i).test(v.WeaponTextName))) {
-                            output.magic = v.thisWeapon[1] + 3;                           
-                        }
-                    }],
+            description : desc("Choose your Ghaal'Shaarat using the 'Choose Feature' button above"),
+			choices : ["Ghaal'Shaarat"],
+            choicesNotInMenu : false,
+			"ghaal'shaarat" : {
+				name : "Ghaal'Shaarat",			
+				magicitemsAdd : ["Ghaal'Shaarat"]
                 }
-            },
+			},
             "subclassfeature9" : {
                 name : "Runes of War",
                 source : ["EE:KB", 214],
@@ -108,3 +82,52 @@ AddSubClass("artificer", "forge adept", {
             }
         }
     });
+MagicItemsList["Ghaal'Shaarat"] = {
+	name : "Ghaal'Shaarat",
+	nameTest : "Ghaal'Shaarat",
+	source : ["EE:KB", 214],
+	type : "weapon (any)",
+	rarity : "uncommon",
+	magicItemTable : "F",
+	description : desc([
+        "I turn one simple or martial melee weapon into my Ghaal'Shaarat weapon",
+        "My weapon gains a +1 to damage and attack rolls unless the bonus was already higher",
+        "This increases to +2 at 8th level and +3 at 13th",
+        "If my weapon has the thrown property, it returns to my hand immediately after a ranged attack",
+        "The benefits only apply to me until the weapon is destroyed or I imbue a new item"
+    ]),
+	attunement : false,
+	chooseGear : {
+		type : "weapon",
+		prefixOrSuffix : "suffix",
+		descriptionChange : ["replace", "weapon"]
+	},
+    calcChanges : {
+        atkAdd : [
+            function (fields, v) {
+                if (!v.isSpell && !v.theWea.isMagicWeapon && (/^(?=.*Ghaal'Shaarat).*$/i).test(v.WeaponTextName)) {
+                    v.theWea.isMagicWeapon = true;
+                    fields.Description = fields.Description.replace(/(, |; )?Counts as magical/i, '');
+                    fields.Description += (fields.Description ? '; ' : '') + "Its my Ghaal'Shaarat";
+
+                    if ((/^(?=.*thrown).*$/i).test(v.WeaponText)) {
+                        fields.Description += (fields.Description ? '; ' : '') + 'Returns immediately after ranged attack';
+                    }
+                }
+            },
+            "If my weapon has Ghaal'Shaarat it gains a bonus to hit and damage."
+        ],
+        atkCalc : [
+            function (fields, v, output) {
+                if ((classes.known.artificer.level >= 2 && classes.known.artificer.level <= 6 && (/^(?=.*Ghaal'Shaarat).*$/i).test(v.WeaponTextName))) {
+                    output.magic = v.thisWeapon[1] + 1;                            
+                }
+                else if ((classes.known.artificer.level >= 7 && classes.known.artificer.level <= 12 && (/^(?=.*Ghaal'Shaarat).*$/i).test(v.WeaponTextName))) {
+                    output.magic = v.thisWeapon[1] + 2;          
+                }
+                else if ((classes.known.artificer.level >= 13 && (/^(?=.*Ghaal'Shaarat).*$/i).test(v.WeaponTextName))) {
+                    output.magic = v.thisWeapon[1] + 3;                           
+                }
+            }],
+        }
+}
