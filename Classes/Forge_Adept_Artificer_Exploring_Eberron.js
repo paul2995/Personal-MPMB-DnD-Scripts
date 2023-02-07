@@ -1,4 +1,4 @@
-var iFileName = "Exploring_Eberron_Forge_Adept.js";
+var iFileName = "Forge_Adept_Artificer_Exploring_Eberron.js";
 AddSubClass("artificer", "forge adept", {
     regExpSearch : /^(?=.*forge)(?=.*adept).*$/i,
     subname : "Forge Adept",

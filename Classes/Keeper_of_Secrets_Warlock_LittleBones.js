@@ -1,4 +1,4 @@
-var iFileName = "The Keeper of Secrets.js";
+var iFileName = "Keeper_of_Secrets_Warlock_LittleBones.js";
 RequiredSheetVersion(12.999);
 
 // Define the source

@@ -1,4 +1,4 @@
-var iFileName = "laserllama_master_at_arms.js";
+var iFileName = "Master_at_Arms_Fighter_LaserLlama.js";
 AddSubClass("fighter", "master at arms", {
 	regExpSearch : /^(?=.*(war|fighter|battle|martial))(?=.*arms).*$/i,
 	subname : "Master at Arms",
